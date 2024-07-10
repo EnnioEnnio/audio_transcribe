@@ -16,6 +16,9 @@ Ensure you have the following installed:
     poetry install
     ```
 3. Place your input audio files in the `input` folder.
+4. Create an `.env` file in the root directory and add the following:
+- `OPENAI_API_KEY="YOUR_OPENAI_API_KEY"`
+
 
 ## Usage
 
