@@ -3,6 +3,7 @@ import logging
 import os
 import threading
 import time
+from pathlib import Path
 
 from openai import OpenAI
 
@@ -49,19 +50,20 @@ def transcribe_audio(file_path: str, output_path: str, language: str) -> None:
 
 
 def get_file_paths(input_file: str) -> tuple[str, str]:
-    base_dir = os.path.dirname(os.path.dirname(__file__))
-    input_dir = os.path.join(base_dir, "input")
-    output_dir = os.path.join(base_dir, "output")
+    base_dir = Path(__file__).parent.parent
 
-    input_file_path = os.path.join(input_dir, input_file)
-    output_file_name = os.path.splitext(input_file)[0] + "_transcription.txt"
-    output_file_path = os.path.join(output_dir, output_file_name)
+    input_dir = base_dir / "input"
+    output_dir = base_dir / "output"
 
-    if not os.path.exists(input_file_path):
+    input_file_path = input_dir / input_file
+    output_file_name = f"{input_file_path.stem}_transcription.txt"
+    output_file_path = output_dir / output_file_name
+
+    if not input_file_path.exists():
         logger.log(logging.ERROR, f"Error: The file {input_file_path} does not exist.")
-        return FileNotFoundError
+        raise FileNotFoundError(f"The file {input_file_path} does not exist.")
 
-    return input_file_path, output_file_path
+    return str(input_file_path), str(output_file_path)
 
 
 if __name__ == "__main__":
