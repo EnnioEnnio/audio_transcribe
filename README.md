@@ -18,6 +18,7 @@ Ensure you have the following installed:
 3. Place your input audio files in the `input` folder.
 4. Create an `.env` file in the root directory and add the following:
 - `OPENAI_API_KEY="YOUR_OPENAI_API_KEY"`
+    - Alternatively run `export OPENAI_API_KEY="YOUR_OPENAI_API_KEY"` in the terminal before running the script.
 
 
 ## Usage
@@ -29,6 +30,5 @@ poetry run python main.py -f <FILENAME_IN_INPUT_FOLDER> -l <LANGUAGE_CODE>
 ```
 
 ### Arguments
-- --input or -i: Path to the input audio file (should be placed in the input folder).
-- --output or -o: Path to save the output transcription file (will be saved in the output folder).
+- --file or -f: name of the file to be transcribed with file ending (should be placed in the input folder).
 - --language or -l: Language code of the audio file (e.g., en for English).
